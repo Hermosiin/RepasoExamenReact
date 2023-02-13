@@ -1,28 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useContext } from "react";
 import { UserContext } from "../userContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({ setCanvi }) {
 
-  let {usuari, setUsuari} = useContext(UserContext);
+  let {usuari, setUsuari,idUser, setIdUser} = useContext(UserContext);
   let [correu, setCorreu] = useState("");
   let [password, setPassword] = useState("");
 
   const sendLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await fetch("http://localhost:3004/users", {
+      const data = await fetch("http://localhost:3004/users?email="+ correu, {
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
         },
-        method: "POST",
-        body: JSON.stringify({ email: correu, password: password })
+        method: "GET",
       });
-
       const resposta = await data.json();
-      console.log(resposta);
-      setUsuari(resposta.id);
+      if (password == resposta[0].password){
+        setUsuari(resposta[0].email);
+        setIdUser(resposta[0].id)
+      }else{
+        alert("Contraseña erronea");
+      }
     } catch {
       console.log("Error");
       //alert("catch");
