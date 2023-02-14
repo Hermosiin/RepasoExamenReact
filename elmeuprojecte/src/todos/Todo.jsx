@@ -43,7 +43,7 @@ export default function Todo () {
     try{
       const data = await fetch("http://localhost:3004/todos/" + id, {
         headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
         },
         method: "DELETE",
@@ -57,7 +57,7 @@ export default function Todo () {
         navigate("/todos")
 
     }catch {
-      console.log(data);
+
       console.log("catch");
     }
   }

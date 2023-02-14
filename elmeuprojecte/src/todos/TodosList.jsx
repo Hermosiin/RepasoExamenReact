@@ -38,8 +38,8 @@ const TodosList = () => {
       try{
         const data = await fetch("http://localhost:3004/todos/" + id, {
           headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Content-Type": "application/json",
           },
           method: "DELETE",
       })
@@ -51,7 +51,7 @@ const TodosList = () => {
           console.log("Place eliminat correctament");
   
       }catch {
-        console.log(data);
+
         console.log("catch");
       }
     }
